@@ -19,9 +19,15 @@ for (var i = 3; i < input.length; i++) {
 		grabTweets();
 		break;
 		case "spotify-this-song":
+		if (arg.length === 0) {
+			arg = "The Sign Ace of Base"
+		}
 		spotifyOK(arg);
 		break;
 		case "movie-this":
+		if (arg.length === 0) {
+			arg = "Mr. Nobody"
+		}
 		searchMovie(arg);
 		break;
 		case "do-what-it-says":
@@ -44,18 +50,13 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
 }
 function spotifyOK(song) {
 
-		keys.spotify.search({ type: 'track', query: song }, function(err, data) {
+		keys.spotify.search({ type: 'track', query: song}, function(err, data) {
+			console.log("Artist Name: " + data.tracks.items[i].artists[0].name);
 			console.log("Song Name: " + data.tracks.items[i].name);
+			console.log("Preview Here: " + data.tracks.items[i].album.artists[0].external_urls.spotify);
+			console.log("Album: " + data.tracks.items[i].album.name);
 			console.log("-------------------------");
-			console.log(data.tracks.items[i].artists[0].name);
 		});
-
-  	if (input.length === undefined) {s
-  		keys.spotify.search({ type: 'track', query: '"The Sign" by Ace of Base'}, function(err, data){
-  			console.log(data.tracks.items[i].name);
-
-  		})
-  	}
 //console.log(JSON.stringify(data, null, 2));
 }
 
@@ -73,7 +74,7 @@ function searchMovie(movie) {
 		var omdbUrl = 'http://www.omdbapi.com/?t=' + movieTitle + '&plot=short&apikey=trilogy';
 
 		request(omdbUrl, function(error, response, body){
-			console.log(body);
+			console.log(JSON.stringify(body[i].Title));
 		})
 	}
 
