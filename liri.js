@@ -13,6 +13,9 @@ for (var i = 3; i < input.length; i++) {
 	var arg = input[i];
 	console.log(arg);
 }
+switchCommand();
+
+function switchCommand(){
 
 	switch(command) {
 		case "my-tweets":
@@ -34,6 +37,7 @@ for (var i = 3; i < input.length; i++) {
 		readWords();
 		break;
 	}
+}
 
 function grabTweets(){
 
@@ -74,7 +78,15 @@ function searchMovie(movie) {
 		var omdbUrl = 'http://www.omdbapi.com/?t=' + movieTitle + '&plot=short&apikey=trilogy';
 
 		request(omdbUrl, function(error, response, body){
-			console.log(JSON.stringify(body[i].Title));
+			body = JSON.parse(body);
+			console.log("Title: " + body.Title);
+			console.log("Released: " + body.Released);
+			console.log("IMDB Rating: " + body.imdbRating);
+			console.log("Rotten Tomatoes Value: " + body.Ratings[1].Value);
+			console.log("Produced In: " + body.Country);
+			console.log("Languages: " + body.Language);
+			console.log("Plot: " + body.Plot);
+			console.log("Actors: " + body.Actors);
 		})
 	}
 
@@ -83,6 +95,8 @@ function readWords() {
 		if (error) {
 			return console.log(error);
 		}
-		spotifyOK(data);
+		command = data.split(",")[0];
+		arg = data.split(",")[1];
+		switchCommand();
 		})
 }
