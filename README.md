@@ -4,8 +4,8 @@ A command line node application that takes in parameters and give you back data.
 * [NodeJS](https://nodejs.org/en/)
 ## How To
 Once Node is installed navigate to location of file then in command run 
-"npm install"
-"node liri.js (commands) (movie or song)"
+1. "npm install"
+2. "node liri.js (commands) (movie or song)"
 ## Commands 
 * my-tweets
 * spotify-this-song
